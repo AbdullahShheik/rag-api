@@ -1,6 +1,6 @@
 import os
 from sqlalchemy.orm import Session
-from sentence_transformers import SentenceTransformer
+from fastembed import TextEmbedding
 from google.generativeai import GenerativeModel
 import google.generativeai as genai
 
@@ -9,10 +9,10 @@ from app.models import Chunk, Document
 
 _embedder = None
 
-def get_embedder() -> SentenceTransformer:
+def get_embedder():
     global _embedder
     if _embedder is None:
-        _embedder = SentenceTransformer("all-MiniLM-L6-v2")
+        _embedder = TextEmbedding("sentence-transformers/all-MiniLM-L6-v2")
     return _embedder
 
 
@@ -70,7 +70,7 @@ def ask(db: Session, question: str, k: int = 3, category: str = None) -> dict:
     embedder = get_embedder()
 
     try:
-        question_vector = embedder.encode(question).tolist()
+        question_vector = list(embedder.embed([question]))[0].tolist()
     except Exception as e:
         raise RuntimeError(f"Embedding failed: {e}") from e
 

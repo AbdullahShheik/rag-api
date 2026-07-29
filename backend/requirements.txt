@@ -5,15 +5,8 @@ alembic
 psycopg2-binary
 pgvector
 python-dotenv
-langchain
-langchain-community
-langchain-google-genai
-langchain-text-splitters
 fastembed
-datasets
-pydantic[email]
-huggingface-hub
-sentence-transformers
 google-generativeai
 pandas
 pyarrow
+pydantic
