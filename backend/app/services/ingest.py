@@ -74,6 +74,16 @@ def ingest_from_parquet(
                     chunks_skipped += 1
                     continue
 
+                existing = db.query(Chunk).filter(
+                    Chunk.document_id == row["source_id"],
+                    Chunk.section_id == str(row.get("section_id", "")),
+                    Chunk.content == row["content"],
+                ).first()
+
+                if existing:
+                    chunks_skipped += 1
+                    continue
+
                 db.add(Chunk(
                     id=uuid.uuid4(),
                     document_id=row["source_id"],

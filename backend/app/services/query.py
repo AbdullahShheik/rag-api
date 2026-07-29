@@ -1,5 +1,6 @@
 import os
 from sqlalchemy.orm import Session
+from sqlalchemy import String
 from fastembed import TextEmbedding
 from google.generativeai import GenerativeModel
 import google.generativeai as genai
@@ -18,7 +19,7 @@ def get_embedder():
 
 def get_llm() -> GenerativeModel:
     genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-    return GenerativeModel("gemini-2.0-flash")
+    return GenerativeModel("gemini-3.6-flash")
 
 
 def retrieve_chunks(
@@ -27,15 +28,15 @@ def retrieve_chunks(
     k: int = 3,
     category: str = None,
 ) -> list:
-    query = db.query(Chunk)
-
-    if category:
-        query = (
-            query.join(Document)
-            .filter(Document.categories.cast(str).ilike(f"%{category}%"))
-        )
-
     try:
+        query = db.query(Chunk)
+
+        if category:
+            query = (
+                query.join(Document, Chunk.document_id == Document.source_id)
+                .filter(Document.categories.cast(String).ilike(f"%{category}%"))
+            )
+
         results = (
             query
             .order_by(Chunk.embedding.cosine_distance(question_vector))
