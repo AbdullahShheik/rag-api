@@ -13,3 +13,7 @@ fastembed
 datasets
 pydantic[email]
 huggingface-hub
+sentence-transformers
+google-generativeai
+pandas
+pyarrow
