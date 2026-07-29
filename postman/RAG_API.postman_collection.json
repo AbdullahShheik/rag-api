@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "3a6a4fcb-9917-4f1e-9aee-aecc27fca97a",
+		"name": "RAG_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "52299447",
+		"_collection_link": "https://abdullahshheikh2-9306441.postman.co/workspace/Abdullah-Shaikh's-Workspace~481f9cc8-3a90-4570-8242-aa1af0c44e50/collection/52299447-3a6a4fcb-9917-4f1e-9aee-aecc27fca97a?action=share&source=collection_link&creator=52299447"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ingest",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/ingest/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ingest",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"question\": \"What is a complexified tetrahedron?\",\n  \"k\": 5,\n  \"category\": \"math.GT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/ask/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"ask",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
