@@ -7,9 +7,9 @@ pgvector
 python-dotenv
 langchain
 langchain-community
-langchain-huggingface
 langchain-google-genai
 langchain-text-splitters
-sentence-transformers
+fastembed
 datasets
 pydantic[email]
+huggingface-hub
